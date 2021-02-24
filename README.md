@@ -2,9 +2,6 @@
 
 ### UPDATE:
 
-This repo is no longer maintained, and is quite old. A fork has been created at: https://github.com/InsomniacSabbir/anagrammatix that includes a leaderboard.
-You can play this game online here: http://anagrammatix-bd.herokuapp.com
-
 A multi-player, multi-screen game built to experiment with Socket.IO and Node.js.
 
 
