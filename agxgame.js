@@ -58,7 +58,7 @@ function hostPrepareGame(gameId) {
         mySocketId : sock.id,
         gameId : gameId
     };
-    //console.log("All Players Present. Preparing game...");
+    // console.log("All Players Present. Preparing game...");
     io.sockets.in(data.gameId).emit('beginNewGame', data);
 }
 
@@ -139,13 +139,14 @@ function findLeader()
  * @param data Contains data entered via player's input - playerName and gameId.
  */
 function playerJoinGame(data) {
-    //console.log('Player ' + data.playerName + 'attempting to join game: ' + data.gameId );
+    // console.log('Player ' + data.playerName + ' is attempting to join game: ' + data.gameId );
 
     // A reference to the player's Socket.IO socket object
     var sock = this;
 
+
     // Look up the room ID in the Socket.IO manager object.
-    var room = gameSocket.manager.rooms["/" + data.gameId];
+    var room = gameSocket.adapter.rooms.get(data.gameId.toString());
 
     // If the room exists...
     if( room != undefined ){

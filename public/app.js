@@ -39,7 +39,7 @@ jQuery(function($){
          */
         onConnected : function() {
             // Cache a copy of the client's socket.IO session ID on the App
-            App.mySocketId = IO.socket.socket.sessionid;
+            App.mySocketId = IO.socket.sessionid;
             // console.log(data.message);
         },
 
@@ -194,7 +194,7 @@ jQuery(function($){
         bindEvents: function () {
             // Host
             App.$doc.on('click', '#btnCreateGame', App.Host.onCreateClick);
-
+            App.$doc.on('click', '#btnStartGame', App.Host.startGame);
             // Player
             App.$doc.on('click', '#btnJoinGame', App.Player.onJoinClick);
             App.$doc.on('click', '#btnStart',App.Player.onPlayerStartClick);
@@ -318,6 +318,15 @@ jQuery(function($){
                     // Let the server know that two players are present.
                     IO.socket.emit('hostRoomFull',App.gameId);
                 }
+            },
+
+            /**
+             * The Host clicked to start the game
+             */
+            startGame: function (data) {
+                // Let the server know that two players are present.
+                console.log("Host starting game")
+                IO.socket.emit('hostRoomFull', App.gameId);
             },
 
             /**
@@ -483,7 +492,7 @@ jQuery(function($){
              * and clicked Start.
              */
             onPlayerStartClick: function() {
-                // console.log('Player clicked "Start"');
+                console.log('Player clicked "Start"');
 
                 // collect data to send to the server
                 var data = {
@@ -537,7 +546,7 @@ jQuery(function($){
              * @param data
              */
             updateWaitingScreen : function(data) {
-                if(IO.socket.socket.sessionid === data.mySocketId){
+                if(IO.socket.sessionid === data.mySocketId){
                     App.myRole = 'Player';
                     App.gameId = data.gameId;
 
